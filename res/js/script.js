@@ -24,6 +24,15 @@ $(function () {
         $('#courses-container').removeClass('tab active').addClass('tab');
     });
 
+    $('#add-course-button').click(function (event) {
+        if ($('#add-course').hasClass('active')) {
+            $('#add-course').removeClass('active');
+        }
+        else{
+            $('#add-course').addClass('active');
+        }
+    });
+
     function init() {
         // Personal information
         $("#name").text(user.firstname + " " + user.lastname);
