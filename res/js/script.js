@@ -9,8 +9,20 @@ $(function () {
         new Courses("Business Analysis", 1, 56),
     ];
     init();
-   
-    
+
+    $('#courses-button').click(function (event) {
+        $(event.target).removeClass('pill').addClass('pill active');
+        $('#profile-button').removeClass('pill active').addClass('pill');
+        $('#profile-container').removeClass('tab active').addClass('tab');
+        $('#courses-container').removeClass('tab').addClass('tab active');
+    });
+
+    $('#profile-button').click(function (event) {
+        $(event.target).removeClass('pill').addClass('pill active');
+        $('#courses-button').removeClass('pill active').addClass('pill');
+        $('#profile-container').removeClass('tab').addClass('tab active');
+        $('#courses-container').removeClass('tab active').addClass('tab');
+    });
 
     function init() {
         // Personal information
