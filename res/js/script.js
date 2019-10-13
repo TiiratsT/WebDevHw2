@@ -33,12 +33,76 @@ $(function () {
         }
     });
 
+    $('#save-course').click(function (event) {
+        if ((document.getElementById("title").value)&&(document.getElementById("semester").value)&&(document.getElementById("grade").value)) {
+            courses.push(new Courses(document.getElementById("title").value,document.getElementById("semester").value, document.getElementById("grade").value));
+
+            let i = courses.length-1;
+
+            let tr = $("<tr></tr>");
+            let nr = $("<td></td>").text(i+1);
+            let course = $("<td></td>").text(courses[i].title);
+            let semester = $("<td></td>").text(courses[i].semester);
+            let grade = $("<td></td>").text(courses[i].grade);
+
+            tr.append(nr);
+            tr.append(course);
+            tr.append(semester);
+            tr.append(grade);
+
+            // Adding table row to table
+            $("#courses tbody").append(tr);
+
+            document.getElementById("title").value = "";
+            document.getElementById("semester").value = "";
+            document.getElementById("grade").value = "";
+
+            user.gpa = getgpa();
+            $("#gpa strong").text(user.gpa);
+
+            $('#add-course').removeClass('active');
+        }
+    });
+
+    $('#cancel-course').click(function (event) {
+        document.getElementById("title").value = "";
+        document.getElementById("semester").value = "";
+        document.getElementById("grade").value = "";
+
+        $('#add-course').removeClass('active');
+    });
+
+    function getgpa() {
+        let pointSum = 0;
+        for (let i = 0; i < courses.length; i++) {
+            if (courses[i].grade>90){
+                pointSum += 4;
+            }
+            else if (courses[i].grade>80){
+                pointSum += 3;
+            }
+            else if (courses[i].grade>70){
+                pointSum += 2;
+            }
+            else if (courses[i].grade>60){
+                pointSum += 1;
+            }
+            else if (courses[i].grade>50){
+                pointSum += 0.5;
+            }
+            else {
+                pointSum += 0;
+            }
+        }
+        return Math.round(pointSum/courses.length*100)/100;
+    }
+
     function init() {
         // Personal information
         $("#name").text(user.firstname + " " + user.lastname);
         $("#birthdate").text(user.birthdate);
         $("#faculty").text(user.faculty);
-        $("#gpa strong").text(user.gpa);
+        $("#gpa strong").text(getgpa());
         
         // Courses information
         for (let i = 0; i < courses.length; i++) {
