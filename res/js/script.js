@@ -34,8 +34,8 @@ $(function () {
     });
 
     $('#save-course').click(function (event) {
-        if ((document.getElementById("title").value)&&(document.getElementById("semester").value)&&(document.getElementById("grade").value)) {
-            courses.push(new Courses(document.getElementById("title").value,document.getElementById("semester").value, document.getElementById("grade").value));
+        if (($('#title').val())&&($("#semester").val())&&($("#grade").val())) {
+            courses.push(new Courses($("#title").val(),$("#semester").val(), $("#grade").val()));
 
             let i = courses.length-1;
 
@@ -53,9 +53,9 @@ $(function () {
             // Adding table row to table
             $("#courses tbody").append(tr);
 
-            document.getElementById("title").value = "";
-            document.getElementById("semester").value = "";
-            document.getElementById("grade").value = "";
+            $("#title").val("");
+            $("#semester").val("");
+            $("#grade").val("");
 
             user.gpa = getgpa();
             $("#gpa strong").text(user.gpa);
@@ -65,9 +65,9 @@ $(function () {
     });
 
     $('#cancel-course').click(function (event) {
-        document.getElementById("title").value = "";
-        document.getElementById("semester").value = "";
-        document.getElementById("grade").value = "";
+        $("#title").val("");
+        $("#semester").val("");
+        $("#grade").val("");
 
         $('#add-course').removeClass('active');
     });
